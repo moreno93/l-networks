@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+	<meta charset="UTF-8">
+	<title>L-mreže za transformaciju impedancije</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="lib/math.js" type="text/javascript"></script>
+	<script src="lib/d3.min.js" type="text/javascript"></script>
+	<script src="app.js" type="text/javascript"></script>
+</head>
+
+<body>
+	<header>
+			<h1><b>L-mreže za transformaciju impedancije</b></h1>
+	</header>
+	<div id="container">
+		<div id="opciPrikaz" style="display:none;">
+			<div id="pwrapper">
+				<div id="pcontainer">
+					<table border="0">
+						<tr><td align="center">
+							<img src="img/opcenitoUnutar.PNG" width="290px"><br>
+							<label>R<sub>L</sub> > Z<sub>0</sub></label>
+						</td>
+						<td align="center">
+							<img src="img/opcenitoIzvan.PNG" width="290px"><br>
+							<label>R<sub>L</sub> < Z<sub>0</sub></label>
+						</td></tr>
+					</table>
+						<a href="javascript:void(0)" onClick="toggle_visibility('opciPrikaz');">
+							<input type= "button"  value="Natrag">
+						</a>
+				</div>
+			</div>
+		</div>
+		<table border="0" width="100%">
+			<tr>
+				<td width="40%">
+					<div id="pocetnaForma" >
+							<form name="pocetnaForma">
+							Impedancija linije(Z<sub>0</sub>):<br>
+							<input type="text" name="z0" id="z0"> <br><br>
+							Impedancija tereta(Z<sub>L</sub>): <br>
+							<label>R<sub>L</sub></label><input type="text" name="rl" id="rl" onchange="ispisiZl()">  <br>
+							<label>X<sub>L</sub></label><input type="text" name="xl" id="xl" onchange="ispisiZl()"> <br><br>
+							<div id="zl"></div>
+							Frekvencija (MHz): <br>
+							<input type="text" name="f" id="f"> <br>
+
+							<input type="button" value="Izračunaj" name="izracunaj" id="izracunaj" onClick="validacija()"> <br><br>
+							<div id="saveForm">
+								<table>
+									<tr>
+										<td>Ime datoteke:</td>
+										<td><input type="text" id="FileNameToSave"></td>
+										<td><input type="button" value="Spremi" onclick="save()"></td>
+									</tr>
+									<tr>
+										<td>Odaberi datoreku:</td>
+										<td><input type="file" id="fileToLoad"></td>
+										<td><input type="button" value="Učitaj" onclick="load()"><td>
+									</tr>
+								</table>
+							</div>
+							</form>
+					</div>
+				</td>
+				<td rowspan="2">
+					<div id="graph" class="aGraph">
+						<br><br><br><br><br>
+						<table border="0">
+							<tr><td align="center">
+								<img src="img/opcenitoUnutar.PNG" width="290px"><br>
+								R<sub>L</sub> > Z<sub>0</sub>
+							</td>
+							<td align="center">
+								<img src="img/opcenitoIzvan.PNG" width="290px"><br>
+								R<sub>L</sub> < Z<sub>0</sub>
+							</td></tr>
+						</table>
+					</div>
+					<div id = "bandwidth" style="visibility: hidden">
+						<br>
+						<table border="0" align="center" width="60%">
+							<tr>
+								<td colspan="2" align="center">
+									Bandwidth:
+									<br>
+								</td>
+							</tr>
+							<tr>
+								<td width="20%" align="center">
+									Gamma (&Gamma;):
+									<input type="number" id="bandwidthNum" min=0 max=1 step=0.01>
+								</td>
+								<td width="80%" id="bandwidth1rjesenje"></td>
+							</tr>
+							<tr>
+								<td width="20%" align="center">
+									<input type="button" name="bandwidthButton" id="bandwidthButton" value="Izračunaj" onclick="izracunajBandwidth()">
+								</td>
+								<td width="80%" id="bandwidth2rjesenje"></td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td width="40%">
+					<div id="prikazKruga">
+						<table border="0" align="center" id="tablicaMreza" style="visibility: hidden;">
+							<tr>
+								<td align="center" id="prvaMreza"></td>
+								<td align="center" id="drugaMreza"></td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<input type="button" name="opcerijesenje" value="Opće rješenje" onClick="toggle_visibility('opciPrikaz')" align="center">
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<footer>
+		<br>
+		&copy;2015 Moreno Muškovic
+	</footer>
+</body>
+
+</html>
